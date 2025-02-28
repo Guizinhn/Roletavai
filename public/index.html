@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Interactive Roulette</title>
+    <style>
+      body {
+        background-image: url("img/homem de ferro.jpeg");
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .h {
+        position: fixed;
+        bottom: 2rem;
+        left: 4rem;
+        top: 10rem;
+        font-size: 5rem;
+        z-index: 1;
+        background-color: rgb(0, 65, 123);
+        color: #ffffff; /* Azul claro para a letra */
+        font-weight: bold;
+        text-align: center;
+        line-height: 5rem; /* Ajusta o alinhamento vertical */
+        width: 5rem; /* Tamanho proporcional ao texto */
+        height: 5rem; /* Faz um quadrado */
+        border-radius: 12px; /* Cantos arredondados */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06); /* Sombra suave */
+        border: 2px solid #4a90e2; /* Borda azul clara */
+        border-radius: 3rem;
+        padding: 30px;
+        background-color: rgba(0, 195, 255, 0.85);
+        color: black;
+        padding: 1rem;
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombras suaves para as letras */
+        box-shadow: 0 4px 8px 0 rgb(27, 183, 255),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19); /* Brilho inicial suave */
+        animation: fade-in 1s ease-in-out,
+          glow 1.5s ease-in-out infinite alternate, move 3s ease-in-out infinite; /* Animação de brilho e movimento */
+        transition: all 0.5s ease-in-out;
+      }
+
+      /* Animação para fazer o elemento aparecer */
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Animação de brilho pulsante */
+      @keyframes glow {
+        0% {
+          box-shadow: 0 0 10px rgba(0, 195, 255, 0.6),
+            0 0 20px rgba(0, 195, 255, 0.6), 0 0 30px rgba(0, 195, 255, 0.6);
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 30px rgba(0, 195, 255, 1),
+            0 0 60px rgba(0, 195, 255, 1), 0 0 90px rgba(0, 195, 255, 1);
+          text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+        100% {
+          box-shadow: 0 0 10px rgba(0, 195, 255, 0.6),
+            0 0 20px rgba(0, 195, 255, 0.6), 0 0 30px rgba(0, 195, 255, 0.6);
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+      }
+
+      /* Animação de movimento suave */
+      @keyframes move {
+        0% {
+          transform: translateY(0); /* Posição inicial */
+        }
+        50% {
+          transform: translateY(-20px); /* Movimento para cima */
+        }
+        100% {
+          transform: translateY(0); /* Volta para a posição original */
+        }
+      }
+
+      .d {
+        position: fixed;
+        bottom: 2rem;
+        left: 4rem;
+        top: 22rem;
+        font-size: 5rem;
+        z-index: 1;
+        background-color: rgb(0, 65, 123);
+        color: #ffffff; /* Azul claro para a letra */
+        font-weight: bold;
+        text-align: center;
+        line-height: 5rem; /* Ajusta o alinhamento vertical */
+        width: 5rem; /* Tamanho proporcional ao texto */
+        height: 5rem; /* Faz um quadrado */
+        border-radius: 12px; /* Cantos arredondados */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06); /* Sombra suave */
+        border: 2px solid #4a90e2; /* Borda azul clara */
+        border-radius: 3rem;
+        padding: 30px;
+        background-color: rgba(0, 195, 255, 0.85);
+        color: black;
+        padding: 1rem;
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombras suaves para as letras */
+        box-shadow: 0 4px 8px 0 rgb(27, 183, 255),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19); /* Brilho inicial suave */
+        animation: fade-in 1s ease-in-out,
+          glow 1.5s ease-in-out infinite alternate, move 3s ease-in-out infinite; /* Animação de brilho e movimento */
+        transition: all 0.5s ease-in-out;
+      }
+
+      /* Animação para fazer o elemento aparecer */
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Animação de brilho pulsante */
+      @keyframes glow {
+        0% {
+          box-shadow: 0 0 10px rgba(0, 195, 255, 0.6),
+            0 0 20px rgba(0, 195, 255, 0.6), 0 0 30px rgba(0, 195, 255, 0.6);
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 30px rgba(0, 195, 255, 1),
+            0 0 60px rgba(0, 195, 255, 1), 0 0 90px rgba(0, 195, 255, 1);
+          text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+        100% {
+          box-shadow: 0 0 10px rgba(0, 195, 255, 0.6),
+            0 0 20px rgba(0, 195, 255, 0.6), 0 0 30px rgba(0, 195, 255, 0.6);
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+      }
+
+      /* Animação de movimento suave */
+      @keyframes move {
+        0% {
+          transform: translateY(0); /* Posição inicial */
+        }
+        50% {
+          transform: translateY(-20px); /* Movimento para cima */
+        }
+        100% {
+          transform: translateY(0); /* Volta para a posição original */
+        }
+      }
+
+      .f {
+        position: fixed;
+        bottom: 2rem;
+        left: 4rem;
+        top: 36rem;
+        font-size: 5rem;
+        z-index: 1;
+        background-color: rgb(0, 65, 123);
+        color: #ffffff; /* Azul claro para a letra */
+        font-weight: bold;
+        text-align: center;
+        line-height: 5rem; /* Ajusta o alinhamento vertical */
+        width: 5rem; /* Tamanho proporcional ao texto */
+        height: 5rem; /* Faz um quadrado */
+        border-radius: 12px; /* Cantos arredondados */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06); /* Sombra suave */
+        border: 2px solid #4a90e2; /* Borda azul clara */
+        border-radius: 3rem;
+        padding: 30px;
+        background-color: rgba(0, 195, 255, 0.85);
+        color: black;
+        padding: 1rem;
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombras suaves para as letras */
+        box-shadow: 0 4px 8px 0 rgb(27, 183, 255),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19); /* Brilho inicial suave */
+        animation: fade-in 1s ease-in-out,
+          glow 1.5s ease-in-out infinite alternate, move 3s ease-in-out infinite; /* Animação de brilho e movimento */
+        transition: all 0.5s ease-in-out;
+      }
+
+      /* Animação para fazer o elemento aparecer */
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Animação de brilho pulsante */
+      @keyframes glow {
+        0% {
+          box-shadow: 0 0 10px rgba(0, 195, 255, 0.6),
+            0 0 20px rgba(0, 195, 255, 0.6), 0 0 30px rgba(0, 195, 255, 0.6);
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 30px rgba(0, 195, 255, 1),
+            0 0 60px rgba(0, 195, 255, 1), 0 0 90px rgba(0, 195, 255, 1);
+          text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+        100% {
+          box-shadow: 0 0 10px rgba(0, 195, 255, 0.6),
+            0 0 20px rgba(0, 195, 255, 0.6), 0 0 30px rgba(0, 195, 255, 0.6);
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+      }
+
+      /* Animação de movimento suave */
+      @keyframes move {
+        0% {
+          transform: translateY(0); /* Posição inicial */
+        }
+        50% {
+          transform: translateY(-20px); /* Movimento para cima */
+        }
+        100% {
+          transform: translateY(0); /* Volta para a posição original */
+        }
+      }
+
+      .container {
+        position: relative;
+        right: 17rem;
+        display: flex;
+        gap: 20px;
+        top: 5rem;
+        align-items: flex-start;
+        position: relative;
+        background-color: rgba(1, 217, 255, 0.8);
+
+        border-radius: 3rem;
+        padding: 30px;
+        background-color: rgba(0, 195, 255, 0.85);
+        color: black;
+        padding: 1rem;
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombras suaves para as letras */
+        box-shadow: 0 4px 8px 0 rgb(27, 183, 255),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19); /* Brilho inicial suave */
+        animation: fade-in 1s ease-in-out,
+          glow 1.5s ease-in-out infinite alternate, move 3s ease-in-out infinite; /* Animação de brilho e movimento */
+        transition: all 0.5s ease-in-out;
+      }
+
+      /* Animação para fazer o elemento aparecer */
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Animação de brilho pulsante */
+      @keyframes glow {
+        0% {
+          box-shadow: 0 0 10px rgba(0, 195, 255, 0.6),
+            0 0 20px rgba(0, 195, 255, 0.6), 0 0 30px rgba(0, 195, 255, 0.6);
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 30px rgba(0, 195, 255, 1),
+            0 0 60px rgba(0, 195, 255, 1), 0 0 90px rgba(0, 195, 255, 1);
+          text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+        100% {
+          box-shadow: 0 0 10px rgba(0, 195, 255, 0.6),
+            0 0 20px rgba(0, 195, 255, 0.6), 0 0 30px rgba(0, 195, 255, 0.6);
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+      }
+
+      /* Animação de movimento suave */
+      @keyframes move {
+        0% {
+          transform: translateY(0); /* Posição inicial */
+        }
+        50% {
+          transform: translateY(-20px); /* Movimento para cima */
+        }
+        100% {
+          transform: translateY(0); /* Volta para a posição original */
+        }
+      }
+
+      #wheel-container {
+        position: relative;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      }
+      #wheel {
+        width: 100%;
+        height: 100%;
+        transform-origin: center;
+        transition: transform 4s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+      }
+      .control-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      .control-panel input {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+      .control-panel button {
+        padding: 12px;
+        font-size: 16px;
+        color: white;
+        background: linear-gradient(45deg, #ff6b6b, #f06595);
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+      }
+      .control-panel button:hover {
+        background: linear-gradient(45deg, #fa5252, #e64980);
+        transform: scale(1.05);
+      }
+      #result {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        font-size: 32px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 20px;
+        border: 3px solid #ffd700;
+        text-shadow: 0 0 20px #ffd700, 0 0 30px #ff6b6b;
+        opacity: 0;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
+      }
+      #result.show {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      #remove-button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 18px;
+        color: white;
+        background: linear-gradient(45deg, #4caf50, #2e7d32);
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        display: none;
+        transition: background 0.3s, transform 0.2s;
+      }
+      #remove-button:hover {
+        background: linear-gradient(45deg, #43a047, #1b5e20);
+        transform: scale(1.05);
+      }
+      .chatroleta {
+        
+        position: fixed;
+        right: 1rem;
+       background-color:rgb(249, 249, 249);
+       height: 40rem;
+       width: 20rem;
+       border-radius: 3rem;;
+       animation: chatroleta 1s ease-in-out,
+          chatt 1.5s ease-in-out infinite alternate, move 3s ease-in-out infinite; /* Animação de brilho e movimento */
+        transition: all 0.5s ease-in-out;
+      }
+      @keyframes chatroleta{
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Animação de brilho pulsante */
+      @keyframes chatt {
+        0% {
+          box-shadow: 0 0 10px rgba(255, 255, 255, 0.6),
+            0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.6);
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 30px rgb(255, 255, 255),
+            0 0 60px rgb(255, 255, 255), 0 0 90px rgb(255, 255, 255);
+          text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+        100% {
+          box-shadow: 0 0 10px rgba(255, 255, 255, 0.6),
+            0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.6);
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+      }
+
+      /* Animação de movimento suave */
+      @keyframes move {
+        0% {
+          transform: translateY(0); /* Posição inicial */
+        }
+        50% {
+          transform: translateY(-20px); /* Movimento para cima */
+        }
+        100% {
+          transform: translateY(0); /* Volta para a posição original */
+        }
+      }
+      iframe {
+        clip-path: inset(13rem 20rem 9rem 0rem);
+        position: fixed;
+            left: 76rem ;
+            top: 1rem;
+        animation: chatrole 1s ease-in-out,
+          glow 1.5s ease-in-out infinite alternate, move 3s ease-in-out infinite; /* Animação de brilho e movimento */
+        transition: all 0.5s ease-in-out;
+       
+      }
+     
+
+    </style>
+  </head>
+  <body>
+    <div class="chatroleta">
+    </div>
+    <iframe
+      src="http://localhost:3000/chat.html"
+      style="width: 38rem; height: 45rem; border: none; z-index: 1000"
+    >
+    </iframe>
+
+    <div class="h">H</div>
+    <div class="d">D</div>
+    <div class="f">F</div>
+
+    <img class="titleferro" src="img/homem de ferro.png" alt="" />
+    <div class="container">
+      <div id="wheel-container">
+        <canvas id="wheel"></canvas>
+      </div>
+      <div class="control-panel">
+        <input id="new-option" type="text" placeholder="Add Numero" />
+        <button id="add-option">Add Numero</button>
+        <button id="spin-wheel">Girar a roleta</button>
+        <button id="remove-button">Deseja tirar o número da roleta?</button>
+        <button id="delete-option">Excluir Número</button>
+      </div>
+    </div>
+
+    <div id="result"></div>
+
+    <audio id="spin-sound" src="../music/ttk universe.mp3"></audio>
+
+    <script>
+      const canvas = document.getElementById("wheel");
+      const ctx = canvas.getContext("2d");
+      const size = 500;
+      const radius = size / 2;
+      canvas.width = size;
+      canvas.height = size;
+
+      const spinSound = document.getElementById("spin-sound");
+
+      let options = Array.from({ length: 36 }, (_, i) => (i + 1).toString());
+      let currentAngle = 0;
+      let spinning = false;
+
+      function drawWheel() {
+        ctx.clearRect(0, 0, size, size);
+        const sliceAngle = (2 * Math.PI) / options.length;
+
+        options.forEach((option, index) => {
+          const startAngle = index * sliceAngle;
+          const endAngle = startAngle + sliceAngle;
+          const color = `hsl(${(index * 360) / options.length}, 70%, 70%)`;
+
+          ctx.beginPath();
+          ctx.moveTo(radius, radius);
+          ctx.arc(radius, radius, radius, startAngle, endAngle);
+          ctx.fillStyle = color;
+          ctx.fill();
+          ctx.closePath();
+
+          ctx.save();
+          ctx.translate(radius, radius);
+          ctx.rotate(startAngle + sliceAngle / 2);
+          ctx.textAlign = "right";
+          ctx.fillStyle = "#000";
+          ctx.font = "16px Arial";
+          ctx.fillText(option, radius - 10, 5);
+          ctx.restore();
+        });
+      }
+
+      function spinWheel() {
+        if (spinning) return;
+        spinning = true;
+
+        spinSound.currentTime = 0;
+        spinSound.play();
+
+        const spinAngle = Math.random() * 360 + 720;
+        const finalAngle = currentAngle + spinAngle;
+        const resultIndex = Math.floor(
+          ((360 - (finalAngle % 360)) / (360 / options.length)) % options.length
+        );
+
+        canvas.style.transition =
+          "transform 4s cubic-bezier(0.17, 0.67, 0.83, 0.67)";
+        canvas.style.transform = `rotate(${finalAngle}deg)`;
+
+        setTimeout(() => {
+          canvas.style.transition = "none";
+          canvas.style.transform = `rotate(${finalAngle % 360}deg)`;
+          currentAngle = finalAngle % 360;
+
+          const result = options[resultIndex];
+          const resultElement = document.getElementById("result");
+          resultElement.textContent = `Resultado: ${result}`;
+          resultElement.classList.add("show");
+
+          const removeButton = document.getElementById("remove-button");
+          removeButton.style.display = "block";
+
+          spinning = false;
+        }, 4000);
+      }
+
+      document.getElementById("add-option").addEventListener("click", () => {
+        const newOption = document.getElementById("new-option").value.trim();
+        if (newOption && !options.includes(newOption)) {
+          options.push(newOption);
+          drawWheel();
+        }
+      });
+
+      document
+        .getElementById("spin-wheel")
+        .addEventListener("click", spinWheel);
+
+      document.getElementById("remove-button").addEventListener("click", () => {
+        const resultElement = document.getElementById("result").textContent;
+        const number = resultElement.split(": ")[1];
+        options = options.filter((option) => option !== number);
+        drawWheel();
+        document.getElementById("result").classList.remove("show");
+        document.getElementById("remove-button").style.display = "none";
+      });
+
+      document.getElementById("delete-option").addEventListener("click", () => {
+        const newOption = document.getElementById("new-option").value.trim();
+        if (newOption && options.includes(newOption)) {
+          options = options.filter((option) => option !== newOption);
+          drawWheel();
+        }
+      });
+
+      drawWheel();
+    </script>
+  </body>
+</html>
